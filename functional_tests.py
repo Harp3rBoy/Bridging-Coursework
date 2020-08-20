@@ -11,7 +11,7 @@ class NewVisitorTest(unittest.TestCase):
         self.browser.quit()
 
     def test_can_view_cv_page(self):
-        self.browser.get('http://localhost:8000')
+        self.browser.get('http://localhost:8000/cv')
         self.assertIn('CV', self.browser.title)
         self.fail('Finish the test!')
 
