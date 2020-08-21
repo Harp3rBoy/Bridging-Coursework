@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
-# Create your views here.
+
 def home_page(request):
-    return HttpResponse('<html><title>CV</title></html>')
+    return render(request, 'cv/base.html')

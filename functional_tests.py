@@ -13,6 +13,8 @@ class NewVisitorTest(unittest.TestCase):
     def test_can_view_cv_page(self):
         self.browser.get('http://localhost:8000/cv')
         self.assertIn('CV', self.browser.title)
+        header_text = self.browser.find_element_by_tag_name('h1').text
+        self.assertIn('CV', header_text)
         self.fail('Finish the test!')
 
 
