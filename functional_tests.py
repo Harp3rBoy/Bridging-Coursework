@@ -34,7 +34,8 @@ class NewVisitorTest(unittest.TestCase):
         table = self.browser.find_element_by_id('id_list_table')
         rows = table.find_elements_by_tag_name('tr')
         self.assertTrue(
-            any(row.text == 'Ben Harper' for row in rows)
+            any(row.text == 'Ben Harper' for row in rows),
+            "Name did not appear in table"
         )
 
         self.fail('Finish the test!')
