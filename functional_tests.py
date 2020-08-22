@@ -20,6 +20,7 @@ class NewVisitorTest(unittest.TestCase):
         self.assertIn('CV', header_text)
 
         # personal details div
+        # name
         inputbox = self.browser.find_element_by_id('id_new_item')
         self.assertEqual(
             inputbox.get_attribute('placeholder'),
@@ -33,10 +34,18 @@ class NewVisitorTest(unittest.TestCase):
 
         table = self.browser.find_element_by_id('id_list_table')
         rows = table.find_elements_by_tag_name('tr')
-        self.assertTrue(
-            any(row.text == 'Ben Harper' for row in rows),
-            "Name did not appear in table"
-        )
+        self.assertIn('Ben Harper', [row.text for row in rows])
+
+        # dob
+        inputbox = self.browser.find_element_by_id('id_new_item')
+        inputbox.send_keys('27/06/2000')
+        inputbox.send_keys(Keys.ENTER)
+        time.sleep(1)
+
+        table = self.browser.find_element_by_id('id_list_table')
+        rows = table.find_elements_by_tag_name('tr')
+        self.assertIn('Ben Harper', [row.text for row in rows])
+        self.assertIn('27/06/2000', [row.text for row in rows])
 
         self.fail('Finish the test!')
 
