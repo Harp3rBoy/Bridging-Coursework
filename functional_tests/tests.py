@@ -1,10 +1,10 @@
+from django.test import LiveServerTestCase
 from selenium.webdriver.common.keys import Keys
 from selenium import webdriver
-import unittest
 import time
 
 
-class NewVisitorTest(unittest.TestCase):
+class NewVisitorTest(LiveServerTestCase):
 
     def setUp(self):
         self.browser = webdriver.Firefox()
@@ -18,7 +18,7 @@ class NewVisitorTest(unittest.TestCase):
         self.assertIn(row_text, [row.text for row in rows])
 
     def test_can_view_cv_page(self):
-        self.browser.get('http://localhost:8000/cv')
+        self.browser.get(self.live_server_url + '/cv')
         self.assertIn('CV', self.browser.title)
 
         header_text = self.browser.find_element_by_tag_name('h1').text
