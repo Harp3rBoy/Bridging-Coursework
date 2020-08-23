@@ -1,15 +1,20 @@
 from django.shortcuts import redirect, render
-from cv.models import Item
+from .models import PersonalDetails
+from .forms import DetailsForm
 
 
 def home_page(request):
-    if request.method == 'POST':
-        Item.objects.create(text=request.POST['item_text'])
-        return redirect('/cv')
-
-    items = Item.objects.all()
-    return render(request, 'cv/base.html', {'items': items})
+    return render(request, 'cv/base.html')
 
 
 def details_edit(request):
-    return render(request, 'cv/details_edit.html')
+    if request.method == "POST":
+        form = DetailsForm(request.POST)
+        if form.is_valid():
+            post = form.save()
+            post.save()
+            return redirect('/cv')
+    else:
+        form = DetailsForm()
+        return render(request, 'cv/details_edit.html', {'form': form})
+

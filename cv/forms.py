@@ -7,4 +7,4 @@ class DetailsForm(forms.ModelForm):
 
     class Meta:
         model = PersonalDetails
-        fields = ('title', 'text',)
+        fields = ('name', 'dob', 'email',)
