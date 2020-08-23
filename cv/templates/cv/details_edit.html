@@ -6,5 +6,9 @@
 </head>
 <body>
     <h1>Edit Personal Details</h1>
+    <form method="POST" class="details-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
 </body>
 </html>
