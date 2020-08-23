@@ -61,6 +61,17 @@ class NewVisitorTest(LiveServerTestCase):
         save = edit_form.find_element_by_tag_name('button')
         save.click()
 
+        time.sleep(1)
+
+        name = self.browser.find_element_by_id('name').text
+        self.assertEqual(name, 'Ben Harper')
+
+        dob = self.browser.find_element_by_id('dob').text
+        self.assertEqual(dob, '27/06/2000')
+
+        email = self.browser.find_element_by_id('email').text
+        self.assertEqual(email, 'ben27.harper@gmail.com')
+
         self.fail('Finish the test!')
 
 
