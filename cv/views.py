@@ -4,7 +4,7 @@ from .forms import DetailsForm
 
 
 def home_page(request):
-    return render(request, 'cv/base.html')
+    return render(request, 'cv/cv.html')
 
 
 def details_edit(request):
