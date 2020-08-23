@@ -20,7 +20,13 @@
   {% block header %}
   {% endblock %}
   </div>
-{% block page %}
-{% endblock %}
+    <div class="content container">
+    <div class="row">
+      <div class="col-md-8">
+          {% block page %}
+          {% endblock %}
+      </div>
+    </div>
+  </div>
 </body>
 </html>
