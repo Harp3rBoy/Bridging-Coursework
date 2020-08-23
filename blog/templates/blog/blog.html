@@ -1,0 +1,21 @@
+{% extends 'blog/base.html' %}
+{% block title %}
+  <title>Ben's Blog</title>
+{% endblock %}
+{% block icons %}
+<a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+<a href="{% url 'post_draft_list' %}" class="top-menu"><span class="glyphicon glyphicon-edit"></span></a>
+{% endblock %}
+{% block header %}
+    <h1><a href="/">Ben's Blog</a></h1>
+{% endblock %}
+{% block page %}
+  <div class="content container">
+    <div class="row">
+      <div class="col-md-8">
+        {% block content %}
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+{% endblock %}
