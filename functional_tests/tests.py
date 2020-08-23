@@ -6,6 +6,7 @@ import time
 
 MAX_WAIT = 10
 
+
 class NewVisitorTest(LiveServerTestCase):
 
     def setUp(self):
@@ -35,25 +36,24 @@ class NewVisitorTest(LiveServerTestCase):
         self.assertIn('CV', header_text)
 
         # personal details div
-        # name
-        inputbox = self.browser.find_element_by_id('id_new_item')
-        self.assertEqual(
-            inputbox.get_attribute('placeholder'),
-            'Enter your name'
-        )
+        edit_details = self.browser.find_element_by_id('id_edit_details')
+        edit_details.click()
 
+        time.sleep(1)
+
+        edit_form = self.browser.find_element_by_tag_name('form')
+
+        inputbox = edit_form.find_element_by_name('name')
         inputbox.send_keys('Ben Harper')
 
-        inputbox.send_keys(Keys.ENTER)
-        self.wait_for_row_in_list_table('Ben Harper')
-
-        # dob
-        inputbox = self.browser.find_element_by_id('id_new_item')
+        inputbox = edit_form.find_element_by_name('dob')
         inputbox.send_keys('27/06/2000')
-        inputbox.send_keys(Keys.ENTER)
 
-        self.wait_for_row_in_list_table('Ben Harper')
-        self.wait_for_row_in_list_table('27/06/2000')
+        inputbox = edit_form.find_element_by_name('email')
+        inputbox.send_keys('blh898@student.bham.ac.uk')
+
+        save = edit_form.find_element_by_tag_name('button')
+        save.click()
 
         self.fail('Finish the test!')
 
