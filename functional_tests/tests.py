@@ -36,6 +36,9 @@ class NewVisitorTest(LiveServerTestCase):
         self.assertIn('CV', header_text)
 
         # personal details div
+        personal_details = self.browser.find_element_by_id('id_personal_details').text
+        self.assertIn('Personal Details', personal_details)
+
         edit_details = self.browser.find_element_by_id('id_edit_details')
         edit_details.click()
 
