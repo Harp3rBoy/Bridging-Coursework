@@ -17,4 +17,3 @@ def details_edit(request):
     else:
         form = DetailsForm()
         return render(request, 'cv/details_edit.html', {'form': form})
-

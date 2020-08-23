@@ -44,9 +44,7 @@ class NewVisitorTest(LiveServerTestCase):
 
         time.sleep(1)
 
-        self.assertIn('Edit Personal Details', self.browser.title)
-
-        header_text = self.browser.find_element_by_tag_name('h1').text
+        header_text = self.browser.find_element_by_tag_name('h2').text
         self.assertIn('Edit Personal Details', header_text)
 
         edit_form = self.browser.find_element_by_tag_name('form')

@@ -1,11 +1,5 @@
-{% extends 'blog/base.html' %}
-{% block title %}
-    <title>CV</title>
-{% endblock %}
-{% block header %}
-<h1><a href="/cv">Ben's CV</a></h1>
-{% endblock %}
-{% block page %}
+{% extends 'cv/base.html' %}
+{% block content %}
     <h2 id="id_personal_details">Personal Details</h2>
     <a id="id_edit_details" class="btn btn-default" href="{% url 'details_edit' %}">Edit Details</a>
 {% endblock %}

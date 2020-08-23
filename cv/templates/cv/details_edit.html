@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Edit Personal Details</title>
-</head>
-<body>
-    <h1>Edit Personal Details</h1>
+{% extends 'cv/base.html' %}
+{% block content %}
+    <h2>Edit Personal Details</h2>
     <form method="POST" class="details-form">{% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="save btn btn-default">Save</button>
     </form>
-</body>
-</html>
+{% endblock %}
