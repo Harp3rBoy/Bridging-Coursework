@@ -61,7 +61,7 @@ class NewVisitorTest(LiveServerTestCase):
         save = edit_form.find_element_by_tag_name('button')
         save.click()
 
-        time.sleep(1)
+        time.sleep(10)
 
         name = self.browser.find_element_by_id('name').text
         self.assertEqual(name, 'Ben Harper')

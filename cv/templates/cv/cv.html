@@ -1,5 +1,8 @@
 {% extends 'cv/base.html' %}
 {% block content %}
     <h2 id="id_personal_details">Personal Details</h2>
+    <p id="name">{{ details.name }}</p>
+    <p id="dob">{{ details.dob }}</p>
+    <p id="email">{{ details.email }}</p>
     <a id="id_edit_details" class="btn btn-default" href="{% url 'details_edit' %}">Edit Details</a>
 {% endblock %}
