@@ -50,3 +50,9 @@ class ItemModelTest(TestCase):
         second_saved_item = saved_items[1]
         self.assertEqual(first_saved_item.text, "The first (ever) list item")
         self.assertEqual(second_saved_item.text, "Item the second")
+
+class PostEditTest(TestCase):
+
+    def test_uses_post_edit_template(self):
+        response = self.client.get('/cv/edit_post')
+        self.assertTemplateUsed(response, 'cv/details_edit.html')

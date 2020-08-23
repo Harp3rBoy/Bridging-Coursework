@@ -9,3 +9,7 @@ def home_page(request):
 
     items = Item.objects.all()
     return render(request, 'cv/base.html', {'items': items})
+
+
+def details_edit(request):
+    return render(request, 'cv/details_edit.html')
