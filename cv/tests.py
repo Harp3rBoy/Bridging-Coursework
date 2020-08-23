@@ -8,6 +8,14 @@ class HomePageTest(TestCase):
         response = self.client.get('/cv')
         self.assertTemplateUsed(response, 'cv/base.html')
 
+    def test_shows_personal_details(self):
+        PersonalDetails.objects.create(name='Joe Bloggs', dob='2000-01-01', email='joe.bloggs@gmail.com')
+        response = self.client.get('/cv')
+
+        self.assertIn('Joe Bloggs', response.content.decode())
+        self.assertIn('2000-01-01', response.content.decode())
+        self.assertIn('joe.bloggs@gmail.com', response.content.decode())
+
 
 class PostEditTest(TestCase):
 
