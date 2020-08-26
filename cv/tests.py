@@ -5,12 +5,12 @@ from cv.models import PersonalDetails
 class HomePageTest(TestCase):
 
     def test_uses_base_template(self):
-        response = self.client.get('/cv')
+        response = self.client.get('/cv/')
         self.assertTemplateUsed(response, 'cv/cv.html')
 
     def test_shows_personal_details(self):
         PersonalDetails.objects.create(name='Joe Bloggs', dob='2000-01-01', email='joe.bloggs@gmail.com')
-        response = self.client.get('/cv')
+        response = self.client.get('/cv/')
 
         self.assertIn('Joe Bloggs', response.content.decode())
         self.assertIn('1 Jan 2000', response.content.decode())
@@ -20,11 +20,11 @@ class HomePageTest(TestCase):
 class PostEditTest(TestCase):
 
     def test_uses_post_edit_template(self):
-        response = self.client.get('/cv/edit_post')
+        response = self.client.get('/cv/edit_post/')
         self.assertTemplateUsed(response, 'cv/details_edit.html')
 
     def test_can_save_a_POST_request(self):
-        self.client.post('/cv/edit_post', data={'name': 'Joe Bloggs', 'dob': '2000-01-01', 'email': 'joe.bloggs@gmail.com'})
+        self.client.post('/cv/edit_post/', data={'name': 'Joe Bloggs', 'dob': '2000-01-01', 'email': 'joe.bloggs@gmail.com'})
 
         self.assertEqual(PersonalDetails.objects.count(), 1)
         my_personal_details = PersonalDetails.objects.first()
@@ -33,9 +33,9 @@ class PostEditTest(TestCase):
         self.assertEqual(my_personal_details.email, 'joe.bloggs@gmail.com')
 
     def test_redirects_after_POST(self):
-        response = self.client.post('/cv/edit_post', data={'name': 'Joe Bloggs', 'dob': '2000-01-01', 'email': 'joe.bloggs@gmail.com'})
+        response = self.client.post('/cv/edit_post/', data={'name': 'Joe Bloggs', 'dob': '2000-01-01', 'email': 'joe.bloggs@gmail.com'})
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response['location'], '/cv')
+        self.assertEqual(response['location'], '/cv/')
 
 
 class PersonalDetailsModelTest(TestCase):

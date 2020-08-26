@@ -18,7 +18,7 @@ def details_edit(request):
         if form.is_valid():
             post = form.save()
             post.save()
-            return redirect('/cv')
+            return redirect('home')
     else:
         form = DetailsForm()
-        return render(request, 'cv/details_edit.html', {'form': form})
+    return render(request, 'cv/details_edit.html', {'form': form})

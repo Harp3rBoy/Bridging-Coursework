@@ -29,7 +29,7 @@ class NewVisitorTest(LiveServerTestCase):
                 time.sleep(0.5)
 
     def test_can_view_cv_page(self):
-        self.browser.get(self.live_server_url + '/cv')
+        self.browser.get(self.live_server_url + '/cv/')
         self.assertIn('CV', self.browser.title)
 
         header_text = self.browser.find_element_by_tag_name('h1').text
@@ -53,6 +53,7 @@ class NewVisitorTest(LiveServerTestCase):
         inputbox.send_keys('Ben Harper')
 
         inputbox = edit_form.find_element_by_name('dob')
+        inputbox.clear()
         inputbox.send_keys('27/06/2000')
 
         inputbox = edit_form.find_element_by_name('email')
@@ -61,16 +62,16 @@ class NewVisitorTest(LiveServerTestCase):
         save = edit_form.find_element_by_tag_name('button')
         save.click()
 
-        time.sleep(10)
+        time.sleep(1)
 
         name = self.browser.find_element_by_id('name').text
         self.assertEqual(name, 'Ben Harper')
 
         dob = self.browser.find_element_by_id('dob').text
-        self.assertEqual(dob, '27/06/2000')
+        self.assertEqual(dob, '27 Jun 2000')
 
         email = self.browser.find_element_by_id('email').text
-        self.assertEqual(email, 'ben27.harper@gmail.com')
+        self.assertEqual(email, 'blh898@student.bham.ac.uk')
 
         self.fail('Finish the test!')
 
