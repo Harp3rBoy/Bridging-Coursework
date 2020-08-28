@@ -13,12 +13,13 @@ def home_page(request):
 
 
 def details_edit(request):
+    personal_details = PersonalDetails.objects.first()
     if request.method == "POST":
-        form = DetailsForm(request.POST)
+        form = DetailsForm(request.POST, instance=personal_details)
         if form.is_valid():
             post = form.save()
             post.save()
             return redirect('home')
     else:
-        form = DetailsForm()
+        form = DetailsForm(instance=personal_details)
     return render(request, 'cv/details_edit.html', {'form': form})
