@@ -4,27 +4,37 @@
     <p id="name"><b>Name:</b> {{ personal_details.name }}</p>
     <p id="dob"><b>D.O.B:</b> {{ personal_details.dob }}</p>
     <p id="email"><b>Email:</b> {{ personal_details.email }}</p>
+    {% if user.is_authenticated %}
     <a id="id_edit_details" class="btn btn-default" href="{% url 'edit_personal_details' %}"><span class="glyphicon glyphicon-pencil"></span></a>
+    {% endif %}
 
     <h2 id="id_education">Education</h2>
+    {% if user.is_authenticated %}
     <a id="id_add_education" class="btn btn-default" href="{% url 'new_education' %}"><span class="glyphicon glyphicon-plus"></span></a>
+    {% endif %}
     {% for entry in education %}
         <h3 id="institution">{{ entry.institution }}</h3>
         <p id="grades">{{ entry.grades|linebreaksbr }}</p>
         <p id="start_date"><b>Started:</b> {{ entry.start_date }}</p>
         <p id="end_date"><b>Left:</b> {{ entry.end_date }}</p>
+        {% if user.is_authenticated %}
         <a id="id_edit_education" class="btn btn-default" href="{% url 'edit_education' entry.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
         <a id="id_remove_education" class="btn btn-default" href="{% url 'remove_education' entry.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+        {% endif %}
     {% endfor %}
 
     <h2 id="id_work_experience">Work Experience</h2>
+    {% if user.is_authenticated %}
     <a id="id_add_education" class="btn btn-default" href="{% url 'new_work_experience' %}"><span class="glyphicon glyphicon-plus"></span></a>
+    {% endif %}
     {% for entry in work_experience %}
         <h3 id="company">{{ entry.company }}</h3>
         <p id="description">{{ entry.description|linebreaksbr }}</p>
         <p id="start_date"><b>Started:</b> {{ entry.start_date }}</p>
         <p id="end_date"><b>Left:</b> {{ entry.end_date }}</p>
+        {% if user.is_authenticated %}
         <a id="id_edit_education" class="btn btn-default" href="{% url 'edit_work_experience' entry.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
         <a id="id_remove_education" class="btn btn-default" href="{% url 'remove_work_experience' entry.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+        {% endif %}
     {% endfor %}
 {% endblock %}
