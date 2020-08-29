@@ -17,7 +17,7 @@ class HomePageTest(TestCase):
         self.assertIn('joe.bloggs@gmail.com', response.content.decode())
 
 
-class PostEditTest(TestCase):
+class PersonalDetailsEditTest(TestCase):
 
     def test_uses_post_edit_template(self):
         response = self.client.get('/cv/personal_details/edit/')
