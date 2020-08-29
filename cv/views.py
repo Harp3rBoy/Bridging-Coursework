@@ -12,7 +12,7 @@ def home_page(request):
     return render(request, 'cv/cv.html', {'details': details})
 
 
-def details_edit(request):
+def personal_details_edit(request):
     personal_details = PersonalDetails.objects.first()
     if request.method == "POST":
         form = DetailsForm(request.POST, instance=personal_details)
