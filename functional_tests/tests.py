@@ -1,7 +1,10 @@
+from django.contrib.auth.models import User
 from django.test import LiveServerTestCase
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
 import time
+
+from selenium.webdriver.common.keys import Keys
 
 MAX_WAIT = 10
 
@@ -21,12 +24,26 @@ class NewVisitorTest(LiveServerTestCase):
 
     def setUp(self):
         self.browser = webdriver.Firefox()
+        user = User.objects.create_user('TestingAccount', 'test@test.com', 'TestingAccount')
+        user.save()
 
     def tearDown(self):
         self.browser.quit()
 
     def go_to_cv_page(self):
         self.browser.get(self.live_server_url + '/cv/')
+
+    def login(self):
+        self.browser.get(self.live_server_url + '/accounts/login/')
+        username = self.browser.find_element_by_id('id_username')
+        password = self.browser.find_element_by_id('id_password')
+
+        username.send_keys('TestingAccount')
+        password.send_keys('TestingAccount')
+        password.send_keys(Keys.ENTER)
+
+        # should redirect to blog
+        time.sleep(1)
 
     def test_can_view_blog_page_and_go_to_cv_and_back_again(self):
         self.browser.get(self.live_server_url)
@@ -52,6 +69,8 @@ class NewVisitorTest(LiveServerTestCase):
         self.assertIn('Blog', header_text)
 
     def test_can_edit_personal_details(self):
+        self.login()
+
         self.go_to_cv_page()
         # personal details div
         personal_details = self.browser.find_element_by_id('id_personal_details').text
@@ -90,6 +109,8 @@ class NewVisitorTest(LiveServerTestCase):
         self.assertEqual(email, 'Email: blh898@student.bham.ac.uk')
 
     def test_can_add_and_edit_education(self):
+        self.login()
+
         self.go_to_cv_page()
         # education div
         education = self.browser.find_element_by_id('id_education').text
