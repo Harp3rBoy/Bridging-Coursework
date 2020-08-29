@@ -1,5 +1,4 @@
 from django.test import LiveServerTestCase
-from selenium.webdriver.common.keys import Keys
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
 import time
