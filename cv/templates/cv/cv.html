@@ -16,4 +16,15 @@
         <a id="id_edit_education" class="btn btn-default" href="{% url 'edit_education' entry.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
         <a id="id_remove_education" class="btn btn-default" href="{% url 'remove_education' entry.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
     {% endfor %}
+
+    <h2 id="id_work_experience">Work Experience</h2>
+    <a id="id_add_education" class="btn btn-default" href="{% url 'new_work_experience' %}"><span class="glyphicon glyphicon-plus"></span></a>
+    {% for entry in work_experience %}
+        <h3 id="company">{{ entry.company }}</h3>
+        <p id="description">{{ entry.description|linebreaksbr }}</p>
+        <p id="start_date"><b>Started:</b> {{ entry.start_date }}</p>
+        <p id="end_date"><b>Left:</b> {{ entry.end_date }}</p>
+        <a id="id_edit_education" class="btn btn-default" href="{% url 'edit_work_experience' entry.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+        <a id="id_remove_education" class="btn btn-default" href="{% url 'remove_work_experience' entry.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+    {% endfor %}
 {% endblock %}

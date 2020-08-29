@@ -1,5 +1,5 @@
 from django.test import TestCase
-from cv.models import PersonalDetails, Education
+from cv.models import PersonalDetails, Education, WorkExperience
 
 
 class HomePageTest(TestCase):
@@ -78,5 +78,30 @@ class EducationNewTest(TestCase):
     def test_redirects_after_POST(self):
         response = self.client.post('/cv/education/new/', data={'institution': 'My School', 'grades': 'Maths - A',
                                                                 'start_date': '2016-09-01', 'end_date': '2018-07-01'})
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response['location'], '/cv/')
+
+
+class WorkExperienceNewTest(TestCase):
+
+    def test_uses_details_edit_template(self):
+        response = self.client.get('/cv/work_experience/new/')
+        self.assertTemplateUsed(response, 'cv/details_edit.html')
+
+    def test_can_save_a_POST_request(self):
+        self.client.post('/cv/work_experience/new/', data={'company': 'My Company', 'description': 'Programming',
+                                                           'start_date': '2016-01-01', 'end_date': '2018-01-01'})
+
+        self.assertEqual(WorkExperience.objects.count(), 1)
+        my_work_experience = WorkExperience.objects.first()
+        self.assertEqual(my_work_experience.company, 'My Company')
+        self.assertEqual(my_work_experience.description, 'Programming')
+        self.assertEqual(str(my_work_experience.start_date), '2016-01-01')
+        self.assertEqual(str(my_work_experience.end_date), '2018-01-01')
+
+    def test_redirects_after_POST(self):
+        response = self.client.post('/cv/work_experience/new/',
+                                    data={'company': 'My Company', 'description': 'Programming',
+                                          'start_date': '2016-01-01', 'end_date': '2018-01-01'})
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response['location'], '/cv/')
