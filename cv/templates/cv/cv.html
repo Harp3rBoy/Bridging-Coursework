@@ -14,5 +14,6 @@
         <p id="start_date"><b>Started:</b> {{ entry.start_date }}</p>
         <p id="end_date"><b>Left:</b> {{ entry.end_date }}</p>
         <a id="id_edit_education" class="btn btn-default" href="{% url 'edit_education' entry.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+        <a id="id_remove_education" class="btn btn-default" href="{% url 'remove_education' entry.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
     {% endfor %}
 {% endblock %}

@@ -45,3 +45,9 @@ def education_edit(request, pk):
     else:
         form = EducationForm(instance=post)
     return render(request, 'cv/details_edit.html', {'form': form, 'name': 'Edit Education'})
+
+
+def education_remove(request, pk):
+    post = get_object_or_404(Education, pk=pk)
+    post.delete()
+    return redirect('home')

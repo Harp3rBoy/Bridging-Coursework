@@ -74,7 +74,7 @@ class NewVisitorTest(LiveServerTestCase):
         email = self.browser.find_element_by_id('email').text
         self.assertEqual(email, 'Email: blh898@student.bham.ac.uk')
 
-    def test_can_add_and_edit_education(self):
+    def test_can_add_and_edit_and_delete_education(self):
         self.go_to_cv_page()
         # education div
         education = self.browser.find_element_by_id('id_education').text
