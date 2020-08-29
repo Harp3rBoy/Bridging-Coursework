@@ -57,6 +57,7 @@ class PersonalDetailsModelTest(TestCase):
         self.assertEqual(str(my_personal_details.dob), '2000-01-01')
         self.assertEqual(my_personal_details.email, 'joe.bloggs@gmail.com')
 
+
 class EducationNewTest(TestCase):
 
     def test_uses_details_edit_template(self):

@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from .models import PersonalDetails, Education
 from .forms import PersonalDetailsForm, EducationForm
 
@@ -32,3 +32,16 @@ def education_new(request):
     else:
         form = EducationForm()
     return render(request, 'cv/details_edit.html', {'form': form, 'name': 'New Education'})
+
+
+def education_edit(request, pk):
+    post = get_object_or_404(Education, pk=pk)
+    if request.method == "POST":
+        form = EducationForm(request.POST, instance=post)
+        if form.is_valid():
+            post = form.save()
+            post.save()
+            return redirect('home')
+    else:
+        form = EducationForm(instance=post)
+    return render(request, 'cv/details_edit.html', {'form': form, 'name': 'Edit Education'})

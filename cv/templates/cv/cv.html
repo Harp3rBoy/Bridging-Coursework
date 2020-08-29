@@ -7,11 +7,12 @@
     <a id="id_edit_details" class="btn btn-default" href="{% url 'edit_personal_details' %}"><span class="glyphicon glyphicon-pencil"></span></a>
 
     <h2 id="id_education">Education</h2>
+    <a id="id_add_education" class="btn btn-default" href="{% url 'new_education' %}"><span class="glyphicon glyphicon-plus"></span></a>
     {% for entry in education %}
         <h3 id="institution">{{ entry.institution }}</h3>
         <p id="grades">{{ entry.grades|linebreaksbr }}</p>
         <p id="start_date"><b>Started:</b> {{ entry.start_date }}</p>
         <p id="end_date"><b>Left:</b> {{ entry.end_date }}</p>
+        <a id="id_edit_education" class="btn btn-default" href="{% url 'edit_education' entry.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
     {% endfor %}
-    <a id="id_add_education" class="btn btn-default" href="{% url 'new_education' %}"><span class="glyphicon glyphicon-plus"></span></a>
 {% endblock %}
