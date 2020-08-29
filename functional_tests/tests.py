@@ -66,13 +66,13 @@ class NewVisitorTest(LiveServerTestCase):
         wait_for(lambda: self.assertIn("CV", self.browser.find_element_by_tag_name('h1').text))
 
         name = self.browser.find_element_by_id('name').text
-        self.assertEqual(name, 'Ben Harper')
+        self.assertEqual(name, 'Name: Ben Harper')
 
         dob = self.browser.find_element_by_id('dob').text
-        self.assertEqual(dob, '27 Jun 2000')
+        self.assertEqual(dob, 'D.O.B: 27 Jun 2000')
 
         email = self.browser.find_element_by_id('email').text
-        self.assertEqual(email, 'blh898@student.bham.ac.uk')
+        self.assertEqual(email, 'Email: blh898@student.bham.ac.uk')
 
     def test_can_add_education(self):
         self.go_to_cv_page()
@@ -83,7 +83,7 @@ class NewVisitorTest(LiveServerTestCase):
         add_education = self.browser.find_element_by_id('id_add_education')
         add_education.click()
 
-        wait_for(lambda: self.assertIn("Edit Education", self.browser.find_element_by_tag_name('h2').text))
+        wait_for(lambda: self.assertIn("New Education", self.browser.find_element_by_tag_name('h2').text))
 
         edit_form = self.browser.find_element_by_tag_name('form')
 
@@ -113,7 +113,7 @@ class NewVisitorTest(LiveServerTestCase):
         self.assertEqual(grades, 'Maths - A')
 
         start_date = self.browser.find_element_by_id('start_date').text
-        self.assertEqual(start_date, '1 Sept 2016')
+        self.assertEqual(start_date, 'Started: 1 Sep 2016')
 
         end_date = self.browser.find_element_by_id('end_date').text
-        self.assertEqual(end_date, '1 July 2018')
+        self.assertEqual(end_date, 'Left: 1 Jul 2018')

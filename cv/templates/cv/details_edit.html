@@ -1,6 +1,6 @@
 {% extends 'cv/base.html' %}
 {% block content %}
-    <h2>Edit Personal Details</h2>
+    <h2>{{ name }}</h2>
     <form method="POST" class="details-form">{% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="save btn btn-default">Save</button>
