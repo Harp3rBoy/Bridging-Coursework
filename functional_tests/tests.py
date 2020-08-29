@@ -74,7 +74,7 @@ class NewVisitorTest(LiveServerTestCase):
         email = self.browser.find_element_by_id('email').text
         self.assertEqual(email, 'Email: blh898@student.bham.ac.uk')
 
-    def test_can_add_education(self):
+    def test_can_add_and_edit_education(self):
         self.go_to_cv_page()
         # education div
         education = self.browser.find_element_by_id('id_education').text
@@ -117,3 +117,23 @@ class NewVisitorTest(LiveServerTestCase):
 
         end_date = self.browser.find_element_by_id('end_date').text
         self.assertEqual(end_date, 'Left: 1 Jul 2018')
+
+        # edit entry we just made to add Physics grade
+
+        edit_education = self.browser.find_element_by_id('id_edit_education')
+        edit_education.click()
+
+        wait_for(lambda: self.assertIn("Edit Education", self.browser.find_element_by_tag_name('h2').text))
+
+        edit_form = self.browser.find_element_by_tag_name('form')
+
+        inputbox = edit_form.find_element_by_name('grades')
+        inputbox.send_keys('\nPhysics - B')
+
+        save = edit_form.find_element_by_tag_name('button')
+        save.click()
+
+        wait_for(lambda: self.assertIn("CV", self.browser.find_element_by_tag_name('h1').text))
+
+        grades = self.browser.find_element_by_id('grades').text
+        self.assertEqual(grades, 'Maths - A\nPhysics - B')
