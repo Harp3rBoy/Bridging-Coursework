@@ -29,12 +29,28 @@ class NewVisitorTest(LiveServerTestCase):
     def go_to_cv_page(self):
         self.browser.get(self.live_server_url + '/cv/')
 
-    def test_can_view_cv_page(self):
-        self.go_to_cv_page()
+    def test_can_view_blog_page_and_go_to_cv_and_back_again(self):
+        self.browser.get(self.live_server_url)
+        self.assertIn('Blog', self.browser.title)
+
+        header_text = self.browser.find_element_by_tag_name('h1').text
+        self.assertIn('Blog', header_text)
+
+        cv_button = self.browser.find_element_by_id('cv_button')
+        cv_button.click()
+
         self.assertIn('CV', self.browser.title)
 
         header_text = self.browser.find_element_by_tag_name('h1').text
         self.assertIn('CV', header_text)
+
+        blog_button = self.browser.find_element_by_id('blog_button')
+        blog_button.click()
+
+        self.assertIn('Blog', self.browser.title)
+
+        header_text = self.browser.find_element_by_tag_name('h1').text
+        self.assertIn('Blog', header_text)
 
     def test_can_edit_personal_details(self):
         self.go_to_cv_page()
@@ -74,7 +90,7 @@ class NewVisitorTest(LiveServerTestCase):
         email = self.browser.find_element_by_id('email').text
         self.assertEqual(email, 'Email: blh898@student.bham.ac.uk')
 
-    def test_can_add_and_edit_and_delete_education(self):
+    def test_can_add_and_edit_education(self):
         self.go_to_cv_page()
         # education div
         education = self.browser.find_element_by_id('id_education').text
